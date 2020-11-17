@@ -1,0 +1,55 @@
+{
+  "name": "solo-project-cs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open\" \"nodemon server/server.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "client"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keelnu/solo-project-cs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keelnu/solo-project-cs/issues"
+  },
+  "homepage": "https://github.com/keelnu/solo-project-cs#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.13.0",
+    "eslint-plugin-react": "^7.21.5",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "nodemon": "^2.0.6",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "webpack": "^4.32.2"
+  }
+}

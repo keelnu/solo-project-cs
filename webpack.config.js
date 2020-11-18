@@ -7,9 +7,10 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
-    publicPath: 'http://localhost:8080/build/',
+    publicPath: '/build',
+    contentBase: './public',
     proxy: {
-      '/api': 'http://localhost:3000/',
+      '/': 'http://localhost:3000/',
     },
   },
   module: {

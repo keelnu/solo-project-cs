@@ -1,80 +1,65 @@
-// import React, { Component } from 'react';
 import React, { useState, useEffect } from 'react';
-// import "./App.css";
+import CovidData from './CovidData.jsx';
+// import "../css/App.css";
 
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     // this.state = something;
-//   }
+// let state = 'ny';
+// const covidUrl = `https://api.covidtracking.com/v1/states/${state}/current.json`;
+// // want to pull: positive (total cases), positiveIncrease (new daily cases), death (total probable deaths), hospitalizedCurrently, inIcuCurrently
 
-//   some functionality here
-//   componentDidMount() {
-//     fetch('https://api.covidtracking.com')
-//       .then(res => res.json())
-//       .then(res => this.addCharacters(res.characters))
-//       .catch(err => console.log('App.componentDidMount: get characters: ERROR: ', err));
-//   }
+// function App() {
+//   //  setCovidData is equivalent to writing this.setState() to update the component state with the value of covidData.
+//   // const [covidData, setCovidData] = useState({}); 
+//   const [covidData, setCovidData] = useState({}); 
 
-//   render() {
-//     return (
-//       // something here
-//       <div>
-//         console.log('This is my react app');
+//   // equivalent to componentDidMount
+//   // we are fetching the most current Covid data here
+//   useEffect(() => {
+//     fetch(covidUrl)
+//       .then((response) => {
+//         return response.json();
+//       })
+//       .then((data) => {
+//         console.log('Covid-19 Tracker Data: ', data); // will show what comes back
+//         setCovidData(data); // setting state with data we just fetched and parsed
+//         })
+//       .catch((err) => {
+//         console.log('this is the error ', err);
+//         throw Error(err.message);
+//       });
+//   }, []); // empty array assures it will only run once
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h2>Covid-19 Tracking Data</h2>
+//       </header>
+//       <div className="data-container">
+//         <h5 className="info-item">{covidData.positive}</h5>
 //       </div>
-//     );
-//   }
+//     </div>
+//   );
 // }
-let state = 'fl';
-const covidUrl = `https://api.covidtracking.com/v1/states/${state}/current.json`;
 
-function App() {
-  //  setCovidData is equivalent to writing this.setState() to update the component state with the value of covidData.
-  const [covidData, setCovidData] = useState({}); 
+const App = () => {
 
-  useEffect(() => {
-    // getCovidData();
-    fetch(covidUrl)
-      .then((response) => {
-        // console.log('response', response.text()); // logging reponse (readable streams need response.body)
-        return response.json();
-      })
-      .then((data) => {
-        console.log('data is this: ', data); // will show what comes back
-        setCovidData(data); 
-        })
-      .catch((err) => {
-        console.log('this is the error ', err);
-        throw Error(err.message);
-      });
-  }, []); // empty array assures it will only run once
+  const [listOfStates, setListOfStates] = useState(['ny', 'ca', 'tx', 'mi', 'nj']); // list of states you can choose
+  const [chosenState, setChosenState] = useState('ny'); // setting NY as default state in dashboard
 
-  // const getCovidData = async () => {};
-
-  // componentDidMount() {
-  //   fetch(covidUrl)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log('data is this: ', data); // will show what comes back
-  //       })
-  //     .catch((err) => {
-  //       console.log('this is the error ', err);
-  //       throw Error(err.message);
-  //     });
-  // }
+  const handleStateChange = (newState) => {
+    setChosenState(newState);
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Covid-19 Tracking Data</h2>
-      </header>
-      <div className="data-container">
-        <h5 className="info-item">{covidData.name}</h5>
-      </div>
+    <div>
+      <select onChange={(e) => handleStateChange(e.target.value)}>
+        {
+          listOfStates.map(choice => <option key={choice}>{choice}</option>)
+        }
+      </select>
+      <CovidData chosenState={chosenState}/>
     </div>
-  );
+  )
+
 }
 
 

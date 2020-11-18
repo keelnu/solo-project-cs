@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CovidData from './CovidData.jsx';
 // import "../css/App.css";
 
@@ -42,16 +42,17 @@ import CovidData from './CovidData.jsx';
 
 const App = () => {
 
-  const [listOfStates, setListOfStates] = useState(['ny', 'ca', 'tx', 'mi', 'nj']); // list of states you can choose
-  const [chosenState, setChosenState] = useState('ny'); // setting NY as default state in dashboard
+  const [listOfStates] = useState(['CA', 'CO', 'NY', 'MI', 'NJ', 'TX']); // list of states you can choose
+  const [chosenState, setChosenState] = useState(listOfStates[0]); // setting NY as default state in dashboard
 
   const handleStateChange = (newState) => {
     setChosenState(newState);
   };
 
   return (
-    <div>
-      <select onChange={(e) => handleStateChange(e.target.value)}>
+      <div className="dropdown">
+      <label>Select your state:</label> 
+      <select id="state-select" onChange={(e) => handleStateChange(e.target.value)}>
         {
           listOfStates.map(choice => <option key={choice}>{choice}</option>)
         }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import "../css/App.css";
+import "../css/App.css";
 
 /* want to pull: positive (total cases), positiveIncrease (new daily cases),
 death (total probable deaths), hospitalizedCurrently, inIcuCurrently
@@ -45,16 +45,16 @@ const CovidData = ({chosenState}) => {
   }, [chosenState]);
 
   return (
-    <div>
+    <div className="stats-box">
       <h1 id="state-stat-header">{chosenState} Covid-19 Stats</h1>
       {
         !!Object.keys(covidData).length && // !! if has some truthiness to it, do blah...
-        <div className="stats-box">
-          <h2>Total Cases: {covidData.positive}</h2>
-          <h2>New Daily Cases: {covidData.positiveIncrease}</h2>
-          <h2>Total Deaths: {covidData.death}</h2>
-          <h2>New Daily Deaths: {covidData.deathIncrease}</h2>
-          <h2>Current Hospitalizations: {covidData.hospitalizedCurrently}</h2>
+        <div>
+          <h2 className="stat-label">Total Cases: <span className="covid-total">{covidData.positive}</span></h2>
+          <h2 className="stat-label">Total Deaths: <span className="covid-total">{covidData.death}</span></h2>
+          <h2 className="stat-label">New Daily Cases: <span className="covid-data">{covidData.positiveIncrease}</span></h2>
+          <h2 className="stat-label">New Daily Deaths: <span className="covid-data">{covidData.deathIncrease}</span></h2>
+          <h2 className="stat-label">Current Hospitalizations: <span className="covid-data">{covidData.hospitalizedCurrently}</span></h2>
         </div>
       } 
     </div>
